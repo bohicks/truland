@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TruLand – Lawn & Landscaping</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green-dark: #1a5c1a;
+    --green-mid: #2e8b2e;
+    --green-light: #4caf50;
+    --green-accent: #3dba3d;
+    --gold: #c8a84b;
+    --text-dark: #1a1a1a;
+    --text-mid: #444;
+    --text-light: #666;
+    --bg-light: #f7f8f5;
+    --bg-white: #ffffff;
+  }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: var(--text-dark);
+    background: var(--bg-white);
+    line-height: 1.0;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--bg-white);
+    border-bottom: 3px solid var(--green-mid);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .logo-main {
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: var(--green-dark);
+  }
+
+  .logo-main span {
+    color: var(--green-accent);
+    font-style: italic;
+  }
+
+  .logo-sub {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--text-light);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-mid);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green-mid); }
+
+  .nav-cta {
+    background: var(--green-mid);
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 4px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--green-dark) !important; color: white !important; }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 520px;
+    background: linear-gradient(135deg, #1a3a1a 0%, #2e6b2e 60%, #3a8a3a 100%);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.07;
+    background-image: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%);
+    background-size: 20px 20px;
+  }
+
+  .hero-arrow {
+    position: absolute;
+    right: -60px;
+    top: 0;
+    bottom: 0;
+    width: 55%;
+    background: rgba(255,255,255,0.05);
+    clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+
+  .hero-arrow2 {
+    position: absolute;
+    right: -60px;
+    top: 0;
+    bottom: 0;
+    width: 45%;
+    background: rgba(255,255,255,0.05);
+    clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 5% 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 60px 40px 60px 60px;
+    max-width: 580px;
+  }
+
+  .promo-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: #3a2800;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-size: 52px;
+    font-weight: 900;
+    color: white;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 em {
+    color: var(--green-accent);
+    font-style: normal;
+  }
+
+  .hero-tagline {
+    font-size: 18px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 30px;
+    font-weight: 400;
+  }
+
+  .hero-phone {
+    font-size: 30px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .hero-phone-sub {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--green-accent);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--green-dark); }
+
+  .btn-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.5);
+    padding: 14px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    transition: border-color 0.2s, background 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+  .service-area-bar {
+    background: var(--gold);
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #3a2800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* PROMO BANNER */
+  .promo-banner {
+    background: var(--green-dark);
+    color: white;
+    text-align: center;
+    padding: 28px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .promo-banner::before {
+    content: '';
+    position: absolute;
+    left: -20px; top: -20px;
+    width: 80px; height: 80px;
+    background: var(--green-accent);
+    opacity: 0.15;
+    border-radius: 50%;
+  }
+
+  .promo-banner h2 {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+
+  .promo-banner h2 span { color: var(--gold); }
+
+  .promo-banner p {
+    font-size: 15px;
+    opacity: 0.85;
+  }
+
+  /* SERVICES */
+  .section {
+    padding: 72px 40px;
+  }
+
+  .section-alt { background: var(--bg-light); }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 52px;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 10px;
+  }
+
+  .section-header h2 {
+    font-size: 38px;
+    font-weight: 900;
+    color: var(--text-dark);
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+  }
+
+  .section-divider {
+    width: 60px;
+    height: 3px;
+    background: var(--gold);
+    margin: 0 auto;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    background: var(--bg-white);
+    border-radius: 8px;
+    padding: 36px 30px;
+    border: 1px solid #e0e8e0;
+    border-top: 4px solid var(--green-mid);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  }
+
+  .service-icon {
+    width: 52px;
+    height: 52px;
+    background: #e8f5e9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+
+  .service-icon svg {
+    width: 26px;
+    height: 26px;
+    fill: var(--green-mid);
+  }
+
+  .service-card h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+  }
+
+  .service-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .service-list li {
+    font-size: 14px;
+    color: var(--text-mid);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .check {
+    width: 18px;
+    height: 18px;
+    background: var(--green-mid);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .check::after {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 9px;
+    border: 2px solid white;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg) translate(-1px, -1px);
+  }
+
+  /* WHY US */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .why-card {
+    text-align: center;
+    padding: 30px 20px;
+    background: var(--bg-white);
+    border-radius: 8px;
+    border: 1px solid #e0e8e0;
+  }
+
+  .why-num {
+    font-size: 44px;
+    font-weight: 900;
+    color: var(--green-mid);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .why-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+  }
+
+  .why-desc {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--green-dark);
+    color: white;
+    padding: 72px 40px;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-size: 40px;
+    font-weight: 900;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+
+  .cta-section h2 span { color: var(--gold); }
+
+  .cta-section p {
+    font-size: 18px;
+    opacity: 0.8;
+    margin-bottom: 36px;
+  }
+
+  .cta-phone {
+    font-size: 44px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 8px;
+    text-decoration: none;
+  }
+
+  .cta-phone:hover { color: var(--gold); }
+
+  .cta-phone-label {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 32px;
+  }
+
+  /* CONTACT FORM */
+  .contact-section {
+    padding: 72px 40px;
+    background: var(--bg-light);
+  }
+
+  .contact-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-mid);
+    letter-spacing: 0.5px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 11px 14px;
+    border: 1.5px solid #cdd8cd;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text-dark);
+    background: white;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--green-mid);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 110px; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--green-mid);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+  }
+
+  .form-submit:hover { background: var(--green-dark); }
+
+  .form-note {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 14px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #111;
+    color: rgba(255,255,255,0.6);
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    font-size: 22px;
+    font-weight: 900;
+    color: white;
+  }
+
+  .footer-logo span { color: var(--green-accent); font-style: italic; }
+
+  .footer-info { font-size: 13px; line-height: 1.8; }
+
+  .footer-info a { color: var(--green-accent); text-decoration: none; }
+
+  .footer-bottom {
+    background: #0a0a0a;
+    text-align: center;
+    padding: 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* SUCCESS MSG */
+  .success-msg {
+    display: none;
+    background: #e8f5e9;
+    border: 1px solid var(--green-mid);
+    border-radius: 6px;
+    padding: 16px 20px;
+    color: var(--green-dark);
+    font-weight: 600;
+    text-align: center;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 12px 20px; }
+    .nav-links { display: none; }
+    .hero { min-height: auto; }
+    .hero-content { padding: 50px 20px; }
+    .hero h1 { font-size: 36px; }
+    .section { padding: 50px 20px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; }
+    .cta-phone { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" style="display:inline-block;"><img src="tru1.jpg" alt="TruLand" style="height:100px; width:auto; display:block;"></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#promo">Promotions</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="tel:7014910246" class="nav-cta">701.491.0246</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-arrow"></div>
+  <div class="hero-arrow2"></div>
+  <div class="hero-content">
+    <div class="promo-badge">2026 Spring Prairie Mowing Promotion!</div>
+    <h1>Make Your<br>Property <em>TruLand!</em></h1>
+    <p class="hero-tagline">Lawncare, Landscaping & Prairie Mowing</p>
+    <div class="hero-phone">701.491.0246</div>
+    <div class="hero-phone-sub">Call or Text</div>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Get a Free Estimate</a>
+      <a href="#services" class="btn-outline">Our Services</a>
+    </div>
+  </div>
+</section>
+
+<div class="service-area-bar">✦ Serving Wisconsin &nbsp;·&nbsp; Minnesota &nbsp;·&nbsp; North Dakota ✦</div>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner" id="promo">
+  <h2>2026 <span>Prairie Mowing Promotion</span> — Now Available!</h2>
+  <p>Small &amp; large acreage · Ditches &amp; meadows · Trails &amp; food plots &nbsp;|&nbsp; Call or text for details &amp; pricing</p>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-header">
+    <div class="section-label">What We Do</div>
+    <h2>Our Services</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 8C8 10 5.9 16.17 3.82 21H5.71C6.66 19 7.66 17 9 16c1.39 4 3.06 6 5 6 4 0 7-7 7-14 0-1-.08-2-.13-3C19.61 6.87 18 7.35 17 8z"/></svg>
+      </div>
+      <h3>Prairie &amp; Acreage</h3>
+      <ul class="service-list">
+        <li><span class="check"></span> Small &amp; Large Acreage Mowing</li>
+        <li><span class="check"></span> Ditches &amp; Meadows</li>
+        <li><span class="check"></span> Trails</li>
+	<li><span class="check"></span> Food Plot Maintenance</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 17h10v2H7zm0-4h10v2H7zm-2-8 1.41 1.41L8 4.83V13h2V4.83l1.59 1.58L13 5 9.5 1.5zm10 0-3.5 3.5 1.41 1.41L14.5 7.83V13h2V7.83l1.59 1.58L19.5 8z"/></svg>
+      </div>
+      <h3>Landscaping</h3>
+      <ul class="service-list">
+        <li><span class="check"></span> Mulch &amp; Cedar Chips</li>
+        <li><span class="check"></span> Edging &amp; Stone</li>
+        <li><span class="check"></span> Retaining Walls</li>
+        <li><span class="check"></span> Rock &amp; Steps</li>
+	<li><span class="check"></span> Power Washing - Decks, Concrete</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+      </div>
+      <h3>Lawncare</h3>
+      <ul class="service-list">
+        <li><span class="check"></span> Weekly Mowing &amp; Trimming</li>
+        <li><span class="check"></span> Aerating</li>
+        <li><span class="check"></span> Dethatching</li>
+        <li><span class="check"></span> Spring &amp; Fall Clean-up</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section section-alt">
+  <div class="section-header">
+    <div class="section-label">Why TruLand</div>
+    <h2>Reliable. Local. Professional.</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-num">3</div>
+      <div class="why-label">States Covered</div>
+      <div class="why-desc">Wisconsin, Minnesota &amp; North Dakota</div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">$0</div>
+      <div class="why-label">Free Estimates</div>
+      <div class="why-desc">No-obligation property assessments</div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">3+</div>
+      <div class="why-label">Service Categories</div>
+      <div class="why-desc">Prairie, landscaping &amp; lawncare</div>
+    </div>
+    <div class="why-card">
+      <div class="why-num">Insured</div>
+      <div class="why-label">Peace of Mind</div>
+      <div class="why-desc">Professional &amp; Insured Business</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Free Estimates &amp; <span>Property Assessments</span></h2>
+  <p>Call or text us today — We'd love to take care of your property.</p>
+  <a href="tel:7014910246" class="cta-phone">701.491.0246</a>
+  <div class="cta-phone-label">Call or Text</div>
+  <a href="#contact" class="btn-primary" style="font-size:16px; padding: 15px 36px;">Request an Estimate Online</a>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-header">
+      <div class="section-label">Get in Touch</div>
+      <h2>Request a Free Estimate</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" placeholder="John">
+      </div>
+      <div class="form-group">
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" placeholder="Smith">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" placeholder="(555) 000-0000">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="bo.j.hicks@gmail.com">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="service">Service Interested In</label>
+      <select id="service">
+        <option value="">Select a service...</option>
+        <option>Prairie &amp; Acreage Mowing</option>
+        <option>Landscaping</option>
+        <option>Weekly Lawncare</option>
+        <option>Aerating / Dethatching</option>
+        <option>Spring / Fall Clean-up</option>
+        <option>Multiple Services</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="state">State</label>
+      <select id="state">
+        <option value="">Select your state...</option>
+        <option>Wisconsin</option>
+        <option>Minnesota</option>
+        <option>North Dakota</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="message">Tell us about your property</label>
+      <textarea id="message" placeholder="Describe your property, acreage, and what you're looking for..."></textarea>
+    </div>
+
+    <button class="form-submit" onclick="handleSubmit()">Send My Request →</button>
+    <div class="form-note">Or call/text directly: <strong>701.491.0246</strong></div>
+    <div class="success-msg" id="success-msg">✓ Thank you! We'll be in touch soon to discuss your free estimate.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div><img src="usaflag.jpg" alt="TruLand Logo" style="height:50px; width:auto; display:block;"></div>
+  </div>
+  <div class="footer-info">
+    <div><a href="tel:7014910246">701.491.0246</a> — Call or Text</div>
+    <div style="margin-top:1px;">Free Estimates &amp; Property Assessments</div>
+  </div>
+</footer>
+<div class="footer-bottom">© 2026 TruLand, LLC. All rights reserved.</div>
+
+<script>
+  function handleSubmit() {
+    var fname = document.getElementById('fname').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    if (!fname || !phone) {
+      alert('Please fill in at least your name and phone number.');
+      return;
+    }
+    document.getElementById('success-msg').style.display = 'block';
+    document.querySelector('.form-submit').disabled = true;
+    document.querySelector('.form-submit').style.opacity = '0.5';
+    document.getElementById('success-msg').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
